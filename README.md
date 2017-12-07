@@ -25,8 +25,6 @@ module "vpc" {
 * **allocated-cidr** - **[string]** - (required) - Allocated cidr block for the specific vpc.
 * **region** - **[string]** - (required) - AWS Region to create the vpc.
 * **availability-zones** - **[list]** - (required) - Availability zones for each of the subnets.
-* **newbits** - **[string]** - (default: 8) - Number used to split vpc cidr.
- 
 
 ## Output Variables
 * **public-subnets** - List of public subnets.
