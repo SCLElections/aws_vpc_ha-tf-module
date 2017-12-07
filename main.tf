@@ -10,11 +10,11 @@ resource "aws_vpc" "main" {
   }
 
   tags {
-    Name                   = "vpc-${var.tags["environment"]}-${var.tags["Name"]}"
-    project                = "${var.tags["project"]}"
-    environment            = "${var.tags["environment"]}"
-    cost-center            = "${var.tags["cost-center"]}"
-    creator                = "${var.tags["creator"]}"
+    Name        = "vpc-${var.tags["environment"]}-${var.tags["Name"]}"
+    project     = "${var.tags["project"]}"
+    environment = "${var.tags["environment"]}"
+    cost-center = "${var.tags["cost-center"]}"
+    creator     = "${var.tags["creator"]}"
   }
 }
 
@@ -32,12 +32,12 @@ resource "aws_subnet" "private" {
   }
 
   tags {
-    Name                   = "sub-${var.tags["environment"]}-${var.tags["Name"]}-${element(var.availability-zones, count.index)}-private"
-    project                = "${var.tags["project"]}"
-    environment            = "${var.tags["environment"]}"
-    cost-center            = "${var.tags["cost-center"]}"
-    creator                = "${var.tags["creator"]}"
-    Tier                   = "private"
+    Name        = "sub-${var.tags["environment"]}-${var.tags["Name"]}-${element(var.availability-zones, count.index)}-private"
+    project     = "${var.tags["project"]}"
+    environment = "${var.tags["environment"]}"
+    cost-center = "${var.tags["cost-center"]}"
+    creator     = "${var.tags["creator"]}"
+    Tier        = "private"
   }
 }
 
@@ -56,12 +56,12 @@ resource "aws_subnet" "public" {
   }
 
   tags {
-    Name                   = "sub-${var.tags["environment"]}-${var.tags["Name"]}-${element(var.availability-zones, count.index)}-public"
-    project                = "${var.tags["project"]}"
-    environment            = "${var.tags["environment"]}"
-    cost-center            = "${var.tags["cost-center"]}"
-    creator                = "${var.tags["creator"]}"
-    Tier                   = "public"
+    Name        = "sub-${var.tags["environment"]}-${var.tags["Name"]}-${element(var.availability-zones, count.index)}-public"
+    project     = "${var.tags["project"]}"
+    environment = "${var.tags["environment"]}"
+    cost-center = "${var.tags["cost-center"]}"
+    creator     = "${var.tags["creator"]}"
+    Tier        = "public"
   }
 }
 
@@ -72,11 +72,11 @@ resource "aws_nat_gateway" "ngw" {
   allocation_id = "${aws_eip.nat.*.id[count.index]}"
 
   tags {
-    Name                   = "ngw-${var.tags["environment"]}-${var.tags["Name"]}-nat-gateway"
-    project                = "${var.tags["project"]}"
-    environment            = "${var.tags["environment"]}"
-    cost-center            = "${var.tags["cost-center"]}"
-    creator                = "${var.tags["creator"]}"
+    Name        = "ngw-${var.tags["environment"]}-${var.tags["Name"]}-nat-gateway"
+    project     = "${var.tags["project"]}"
+    environment = "${var.tags["environment"]}"
+    cost-center = "${var.tags["cost-center"]}"
+    creator     = "${var.tags["creator"]}"
   }
 }
 
@@ -95,10 +95,10 @@ resource "aws_internet_gateway" "igw" {
   }
 
   tags {
-    Name                   = "igw-${var.tags["environment"]}-${var.tags["Name"]}-internet-gateway"
-    project                = "${var.tags["project"]}"
-    environment            = "${var.tags["environment"]}"
-    cost-center            = "${var.tags["cost-center"]}"
-    creator                = "${var.tags["creator"]}"
+    Name        = "igw-${var.tags["environment"]}-${var.tags["Name"]}-internet-gateway"
+    project     = "${var.tags["project"]}"
+    environment = "${var.tags["environment"]}"
+    cost-center = "${var.tags["cost-center"]}"
+    creator     = "${var.tags["creator"]}"
   }
 }
