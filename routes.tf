@@ -17,7 +17,6 @@ resource "aws_route" "igw" {
 }
 
 resource "aws_route" "igw-v6" {
-  provider                    = "aws.local"
   route_table_id              = "${aws_route_table.public.id}"
   destination_ipv6_cidr_block = "::/0"
   gateway_id                  = "${aws_internet_gateway.igw.id}"
