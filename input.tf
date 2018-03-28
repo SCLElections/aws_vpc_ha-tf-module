@@ -15,8 +15,3 @@ variable "availability-zones" {
 variable "region" {
   description = "AWS Region for the vpc"
 }
-
-variable "aws_profile" {
-  description = "Profile to use for aws"
-  default     = "scl-production"
-}

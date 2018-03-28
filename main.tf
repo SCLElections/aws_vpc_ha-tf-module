@@ -1,5 +1,4 @@
 resource "aws_vpc" "main" {
-  provider                         = "aws.local"
   cidr_block                       = "${var.allocated-cidr}"
   enable_dns_support               = true
   enable_dns_hostnames             = true
@@ -19,7 +18,6 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_subnet" "private" {
-  provider                        = "aws.local"
   count                           = "${length(var.availability-zones)}"
   vpc_id                          = "${aws_vpc.main.id}"
   cidr_block                      = "${cidrsubnet(aws_vpc.main.cidr_block, length(var.availability-zones), count.index)}"
@@ -42,7 +40,6 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_subnet" "public" {
-  provider                        = "aws.local"
   count                           = "${length(var.availability-zones)}"
   vpc_id                          = "${aws_vpc.main.id}"
   cidr_block                      = "${cidrsubnet(aws_vpc.main.cidr_block, length(var.availability-zones), length(var.availability-zones) + count.index)}"
@@ -66,7 +63,6 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_nat_gateway" "ngw" {
-  provider      = "aws.local"
   count         = "${length(var.availability-zones)}"
   subnet_id     = "${aws_subnet.public.*.id[count.index]}"
   allocation_id = "${aws_eip.nat.*.id[count.index]}"
@@ -81,14 +77,12 @@ resource "aws_nat_gateway" "ngw" {
 }
 
 resource "aws_eip" "nat" {
-  provider = "aws.local"
-  count    = "${length(var.availability-zones)}"
-  vpc      = true
+  count = "${length(var.availability-zones)}"
+  vpc   = true
 }
 
 resource "aws_internet_gateway" "igw" {
-  provider = "aws.local"
-  vpc_id   = "${aws_vpc.main.id}"
+  vpc_id = "${aws_vpc.main.id}"
 
   lifecycle {
     create_before_destroy = true
