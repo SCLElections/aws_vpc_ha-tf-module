@@ -79,6 +79,14 @@ resource "aws_nat_gateway" "ngw" {
 resource "aws_eip" "nat" {
   count = "${length(var.availability-zones)}"
   vpc   = true
+
+  tags {
+    Name        = "eip-${var.tags["environment"]}-${var.tags["Name"]}-${element(var.availability-zones, count.index)}-nat-gateway"
+    project     = "${var.tags["project"]}"
+    environment = "${var.tags["environment"]}"
+    cost-center = "${var.tags["cost-center"]}"
+    creator     = "${var.tags["creator"]}"
+  }
 }
 
 resource "aws_internet_gateway" "igw" {
