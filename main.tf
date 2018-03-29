@@ -68,7 +68,7 @@ resource "aws_nat_gateway" "ngw" {
   allocation_id = "${aws_eip.nat.*.id[count.index]}"
 
   tags {
-    Name        = "ngw-${var.tags["environment"]}-${var.tags["Name"]}-nat-gateway"
+    Name        = "ngw-${var.tags["environment"]}-${var.tags["Name"]}-${element(var.availability-zones, count.index)}-nat-gateway"
     project     = "${var.tags["project"]}"
     environment = "${var.tags["environment"]}"
     cost-center = "${var.tags["cost-center"]}"

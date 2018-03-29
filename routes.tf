@@ -33,7 +33,7 @@ resource "aws_route_table" "private" {
   vpc_id = "${aws_vpc.main.id}"
 
   tags {
-    Name        = "rtb-${var.tags["environment"]}-${var.tags["Name"]}-private"
+    Name        = "rtb-${var.tags["environment"]}-${var.tags["Name"]}-${element(var.availability-zones, count.index)}-private"
     project     = "${var.tags["project"]}"
     environment = "${var.tags["environment"]}"
     cost-center = "${var.tags["cost-center"]}"
